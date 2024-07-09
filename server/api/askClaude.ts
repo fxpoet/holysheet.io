@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 400, message: '질문이 필요합니다.' });
 
     try {
-        let r = await askClaude(question)
+        let r = await askClaude(question).catch(err => err)
         console.log('r:', r)
         return r;
     } catch (error) {
