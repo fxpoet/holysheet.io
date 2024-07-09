@@ -1,5 +1,6 @@
 {
   "name": "holysheet.io",
+  "author": "Kiyoung Jung <im@fxpoet.com>",
   "private": true,
   "type": "module",
   "scripts": {
