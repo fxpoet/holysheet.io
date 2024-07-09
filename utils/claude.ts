@@ -1,6 +1,8 @@
 import Anthropic from "@anthropic-ai/sdk"
+import { useRuntimeConfig } from '#app'
 
-const API_KEY = process.env.CLAUDE_KEY;
+const config = useRuntimeConfig()
+const API_KEY = config.claudeKey // .env 파일의 CLAUDE_KEY 값을 사용합니다
 console.log('API_KEY', API_KEY);
 const anthropic = new Anthropic({ apiKey: API_KEY });
 
