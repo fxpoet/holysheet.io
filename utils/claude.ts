@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk"
 
 const API_KEY = process.env.CLAUDE_KEY;
+console.log('API_KEY', API_KEY);
 const anthropic = new Anthropic({ apiKey: API_KEY });
 
 export async function askClaude(question: string) {
