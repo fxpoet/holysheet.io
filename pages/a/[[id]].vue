@@ -1,16 +1,13 @@
 <template>
-    <div>
+    <div class="p-4">
         <div class="groups-container mx-auto">
             <div class="flex gap-1 justify-center py-2">
                 <div class="flex-1 justify-start">
                     <UButton icon="i-heroicons-plus-small-solid" color="gray" size="xs" @click="addNewGroup" />
                 </div>
                 <div class="flex-1 justify-center flex">
-                    <UButton color="white" variant="solid" icon="i-heroicons-sparkles"
-                    class="yellow-icon"
-                    _click="openModal"
-                    @click="loadDoc('zAYbDcGVPimqamAGvIbO')"
-                    >Generate with Claude</UButton>
+                    <UButton color="white" variant="solid" icon="i-heroicons-sparkles" class="yellow-icon"
+                        _click="openModal" @click="loadDoc('zAYbDcGVPimqamAGvIbO')">Generate with Claude</UButton>
                 </div>
                 <div class="flex-1 flex justify-end">
                     <UColorModeButton class="mr-2" />
@@ -20,7 +17,7 @@
         </div>
 
 
-        <div class="groups-container mx-auto" ref="groupsContainer">
+        <div class="groups-container mx-auto max-w-full" ref="groupsContainer" :style="{ width: containerWidth + 'px' }">
             <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }">
 
                 <ShortcutGroup v-for="element in groups" :group="element" @add-shortcut="addShortcut"
@@ -31,36 +28,31 @@
         </div>
 
         <UModal v-model="isModalOpen">
-          <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-            <div class="p-0">
-              <UTextarea
-                v-model="question"
-                placeholder="어떤 프로그램을 원하세요?"
-                class="w-full"
-                :rows="2"
-              />
-            </div>
+            <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+                <div class="p-0">
+                    <UTextarea v-model="question" placeholder="어떤 프로그램을 원하세요?" class="w-full" :rows="2" />
+                </div>
 
-            <template #footer>
-              <div class="flex justify-end space-x-2">
-                <UButton color="gray" label="취소" @click="isModalOpen = false" />
-                <UButton color="blue" label="질문하기" @click="submitQuestion" />
-              </div>
-            </template>
-          </UCard>
+                <template #footer>
+                    <div class="flex justify-end space-x-2">
+                        <UButton color="gray" label="취소" @click="isModalOpen = false" />
+                        <UButton color="blue" label="질문하기" @click="submitQuestion" />
+                    </div>
+                </template>
+            </UCard>
         </UModal>
 
         <UModal v-model="isQRModalOpen">
-          <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-            <div class="p-4 text-center">
-              <img :src="qrCodeUrl" alt="QR Code" class="mx-auto" />
-            </div>
-            <template #footer>
-              <div class="flex justify-end">
-                <UButton color="gray" label="닫기" @click="isQRModalOpen = false" />
-              </div>
-            </template>
-          </UCard>
+            <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+                <div class="p-4 text-center">
+                    <img :src="qrCodeUrl" alt="QR Code" class="mx-auto" />
+                </div>
+                <template #footer>
+                    <div class="flex justify-end">
+                        <UButton color="gray" label="닫기" @click="isQRModalOpen = false" />
+                    </div>
+                </template>
+            </UCard>
         </UModal>
     </div>
 </template>
@@ -86,44 +78,44 @@ type Group = {
 
 const groups = ref<Group[]>([
     {
-        id:1,
+        id: 1,
         "name": "일반",
         "shortcuts": [
-            { id:10, "key": "Ctrl+C", "description": "선택한 셀 복사" },
-            { id:11, "key": "Ctrl+V", "description": "복사한 셀 붙여넣기" },
-            { id:12, "key": "Ctrl+X", "description": "선택한 셀 잘라내기" },
-            { id:13, "key": "Ctrl+Z", "description": "실행 취소" },
-            { id:14, "key": "Ctrl+Y", "description": "다시 실행" },
-            { id:15, "key": "Ctrl+S", "description": "파일 저장" },
-            { id:16, "key": "F2", "description": "선택한 셀 편집" }
+            { id: 10, "key": "Ctrl+C", "description": "선택한 셀 복사" },
+            { id: 11, "key": "Ctrl+V", "description": "복사한 셀 붙여넣기" },
+            { id: 12, "key": "Ctrl+X", "description": "선택한 셀 잘라내기" },
+            { id: 13, "key": "Ctrl+Z", "description": "실행 취소" },
+            { id: 14, "key": "Ctrl+Y", "description": "다시 실행" },
+            { id: 15, "key": "Ctrl+S", "description": "파일 저장" },
+            { id: 16, "key": "F2", "description": "선택한 셀 편집" }
         ]
     },
     {
-        id:2,
+        id: 2,
         "name": "셀 서식2",
         "shortcuts": [
-            { id:22, "key": "Ctrl+B", "description": "굵게" },
-            { id:23, "key": "Ctrl+I", "description": "기울임꼴" },
-            { id:24, "key": "Ctrl+U", "description": "밑줄" }
+            { id: 22, "key": "Ctrl+B", "description": "굵게" },
+            { id: 23, "key": "Ctrl+I", "description": "기울임꼴" },
+            { id: 24, "key": "Ctrl+U", "description": "밑줄" }
         ]
     },
     {
-        id:3,
+        id: 3,
         "name": "데이터 관리",
         "shortcuts": [
-            { id:31, "key": "Ctrl+F", "description": "찾기" },
-            { id:32, "key": "Ctrl+H", "description": "바꾸기" },
-            { id:33, "key": "F5", "description": "셀로 이동" },
-            { id:34, "key": "Ctrl+Shift+L", "description": "필터 켜기/끄기" }
+            { id: 31, "key": "Ctrl+F", "description": "찾기" },
+            { id: 32, "key": "Ctrl+H", "description": "바꾸기" },
+            { id: 33, "key": "F5", "description": "셀로 이동" },
+            { id: 34, "key": "Ctrl+Shift+L", "description": "필터 켜기/끄기" }
         ]
     },
     {
-        id:4,
+        id: 4,
         "name": "수식",
         "shortcuts": [
-            { id:41, "key": "Alt+=", "description": "자동 합계" },
-            { id:42, "key": "F4", "description": "수식에서 절대 참조와 상대 참조 전환" },
-            { id:43, "key": "F9", "description": "수식 계산" }
+            { id: 41, "key": "Alt+=", "description": "자동 합계" },
+            { id: 42, "key": "F4", "description": "수식에서 절대 참조와 상대 참조 전환" },
+            { id: 43, "key": "F9", "description": "수식 계산" }
         ]
     }
 ]);
@@ -190,43 +182,47 @@ const saveDoc = async () => {
     }
 }
 
-const route = useRoute()
 
 onMounted(async () => {
+    const route = useRoute()
     let id = route.params.id as string
-    if (id) {
-        await loadDoc(id)
+    if (id) await loadDoc(id);
+
+    // 뷰포트 너비를 감지하여 containerWidth 설정
+    if (window.innerWidth <= 400) {
+        containerWidth.value = window.innerWidth;
     }
 })
+
 
 const openModal = async () => {
     isModalOpen.value = true;
 }
 
 const submitQuestion = async () => {
-  if (question.value.trim()) {
-    try {
-      const response = await $fetch('/api/askClaude', {
-        method: 'GET',
-        params: { question: question.value }
-      })
-
-      isModalOpen.value = false
-      question.value = ''
-
-      console.log('Claude 응답:', response.content[0].text.trim())
-
+    if (question.value.trim()) {
         try {
-            groups.value = buildKeySets(response.content[0].text);
-        } catch(err) {
-            console.log('err:', err);
-            alert('적용실패')
-        }
+            const response = await $fetch('/api/askClaude', {
+                method: 'GET',
+                params: { question: question.value }
+            })
 
-    } catch (error) {
-      console.error('API 호출 오류:', error)
+            isModalOpen.value = false
+            question.value = ''
+
+            console.log('Claude 응답:', response.content[0].text.trim())
+
+            try {
+                groups.value = buildKeySets(response.content[0].text);
+            } catch (err) {
+                console.log('err:', err);
+                alert('적용실패')
+            }
+
+        } catch (error) {
+            console.error('API 호출 오류:', error)
+        }
     }
-  }
 }
 
 const buildKeySets = (keyData: string) => {
@@ -271,6 +267,8 @@ const updateGroup = (updatedGroup: Partial<Group>) => {
     }
 }
 
+
+
 const startResize = (e: MouseEvent) => {
     const startX = e.clientX
     const startWidth = containerWidth.value
@@ -293,31 +291,33 @@ const startResize = (e: MouseEvent) => {
     window.addEventListener('mouseup', stopResize)
 }
 
+
+
 const isQRModalOpen = ref(false)
 const qrCodeUrl = ref('')
 
 const generateQR = async () => {
-  try {
-    await saveDoc()
-    if (docId.value) {
-      const url = `${window.location.origin}/a/${docId.value}`
-      qrCodeUrl.value = await QRCode.toDataURL(url)
-      isQRModalOpen.value = true
-    } else {
-      console.error('문서 ID를 가져오지 못했습니다.')
+    try {
+        await saveDoc()
+        if (docId.value) {
+            const url = `${window.location.origin}/a/${docId.value}`
+            qrCodeUrl.value = await QRCode.toDataURL(url)
+            isQRModalOpen.value = true
+        } else {
+            console.error('문서 ID를 가져오지 못했습니다.')
+        }
+    } catch (error) {
+        console.error('QR 코드 생성 중 오류 발생:', error)
     }
-  } catch (error) {
-    console.error('QR 코드 생성 중 오류 발생:', error)
-  }
 }
 </script>
 
-<style scoped>
+<style>
 .groups-container {
     display: flex;
     overflow-x: auto;
     position: relative;
-    width: v-bind(containerWidth + 'px');
+    width: 100%; /* 기본값 설정 */
 }
 
 .groups-container>div:not(.resize-handle) {
@@ -344,9 +344,19 @@ const generateQR = async () => {
 }
 
 @keyframes sparkle {
-    0% { opacity: 1; transform: scale(-1); }
-    50% { opacity: 0.5; transform: scale(1); }
-    100% { opacity: 1; transform: scale(-1); }
-}
+    0% {
+        opacity: 1;
+        transform: scale(-1);
+    }
 
+    50% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(-1);
+    }
+}
 </style>
