@@ -1,2 +1,2 @@
-# holysheet.io
+# Holysheet.io
 Shortcut Sheet Maker 
