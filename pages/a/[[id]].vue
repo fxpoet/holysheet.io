@@ -7,7 +7,7 @@
                 </div>
                 <div class="flex-1 justify-center flex">
                     <UButton color="white" variant="solid" icon="i-heroicons-sparkles" class="yellow-icon"
-                        _click="openModal" @click="loadDoc('zAYbDcGVPimqamAGvIbO')">Generate with Claude</UButton>
+                        _click="openModal" @click="openModal">Generate with Claude</UButton>
                 </div>
                 <div class="flex-1 flex justify-end">
                     <UColorModeButton class="mr-2" />
@@ -39,6 +39,15 @@
                         <UButton color="blue" label="질문하기" @click="submitQuestion" />
                     </div>
                 </template>
+            </UCard>
+        </UModal>
+
+        <UModal v-model="isLoading">
+            <UCard>
+                <div class="p-4 text-center">
+                    <p>Loading...</p>
+                    <UProgress animation="carousel" />
+                </div>
             </UCard>
         </UModal>
 
@@ -199,19 +208,22 @@ const openModal = async () => {
     isModalOpen.value = true;
 }
 
+const isLoading = ref(false)
+
 const submitQuestion = async () => {
     if (question.value.trim()) {
+        isModalOpen.value = false
+        isLoading.value = true
+
         try {
             const response = await $fetch('/api/askClaude', {
                 method: 'GET',
                 params: { question: question.value }
             })
 
-            isModalOpen.value = false
             question.value = ''
 
             console.log('Claude 응답:', response.content[0].text.trim())
-
             try {
                 groups.value = buildKeySets(response.content[0].text);
             } catch (err) {
@@ -221,6 +233,8 @@ const submitQuestion = async () => {
 
         } catch (error) {
             console.error('API 호출 오류:', error)
+        } finally {
+            isLoading.value = false
         }
     }
 }
