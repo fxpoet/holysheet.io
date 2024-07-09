@@ -6,5 +6,8 @@ export default defineNuxtConfig({
 
   compatibilityDate: "2024-07-04",
   extends: ['@nuxt/ui-pro'],
-  modules: ["@nuxt/ui"]
+  modules: ["@nuxt/ui"],
+  runtimeConfig: {
+    CLAUDE_KEY: process.env.CLAUDE_KEY
+  }
 })
