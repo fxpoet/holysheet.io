@@ -1,14 +1,16 @@
-# HolySheet.IO: The ClaudeAI-spoonfeeding shortcut viewer
+# HolySheet.IO: The ClaudeAI-spoonfeeding shortcut sheet.
 
 To survive the job competition against AI Robot,
 
 you must at least use shortcuts to increase your productivity and speed.
 
 Many people try to learn shortcuts. Even in the 21st century,
+they're stuck in an endless cycle of searching blogs, organizing, editing, printing, and getting exhausted,
+eventually giving up on remembering and trashing the shortcut cheat sheets.
 
-they're stuck in an endless cycle of blog searching, editing, printing, and TRASHING shortcut cheat sheets.
+We need a brain-dead easy anti-exhaustion note tool.
 
-And that's why HolySheet was born: to save humanity.
+that's why HolySheet was born: to save humanity.
 
 ![HolySheet Screenshot](public/screenshot-01.png)
 
@@ -29,14 +31,15 @@ And that's why HolySheet was born: to save humanity.
 - Change the order by dragging, and write by double-clicking.
 
 
-### 4. Mobile Necromancer: Bringing Dead Phones Back to Life
+### 4. Mobile Necromancer: Bringing Dead Phones Back to life
 - It supports QR codes to share your shortcut sheet.
 - Scan with your phone and hang it next to your monitor.
 
 
 ### 5. Green Eco Technology
 - Eco-friendly shortcut learning: Save trees by ditching printed cheat sheets.
-- However, we also respect the preferences of those who enjoy destroying the earth environment. It's printable.
+- However, we also respect the preferences of those who enjoy destroying the earth environment.
+  It's printable.
 
 
 ### 6. Side Effects
@@ -48,8 +51,8 @@ Whatever the case, as long as it's used well, that's what matters.
 
 ## FAQ
 
-- This was created in a week, so it has many shortcomings. But it should improve in its second week.
-- Yes, yes, of course, a standalone desktop program version is coming soon.
+- Yes, of course, a standalone desktop program version is coming soon.
+- This was created in a week, so it has many shortcomings. But it should improve in the coming weeks.
 - A Mac version is also planned. For now, if you tell Claude it's for Mac shortcuts, it will create them accordingly."
 
 
@@ -57,15 +60,15 @@ Whatever the case, as long as it's used well, that's what matters.
 
 > 🌟HolySheet is an old idea of mine.
 > realized that mixing Claude with existing old ideas makes them even more amazing.
-> On July 3rd, I learned about the Claude Contest through Facebook,
-> which became a great motivation to start this project.
+> On July 3rd, I found out about the Claude Contest through Facebook,
+> and the contest became a great motivation to start this project.
 
 > Releasing the project within a week was a challenge.
-> I could have thought of better configurations, like using pre-collected program shortcuts and caching..etc
-> but during the short duration of the hackathon, I focused on completion first.
+> I could have thought of better configurations, like using pre-collected program shortcuts and caching etc..
+> but  because the contest duration was short, I focused on completion first.
 
 > Personally, I'm a bit hesitant about public release due to the cost of LLM calls.
-> Therefore, giving me an award will complete the final puzzle.
+> Therefore, giving me an award will complete the final piece of the puzzle.
 > The fate of humanity now rests in the hands of the Claude judges.
 > Thank you for your interest in this program.
 
@@ -90,6 +93,6 @@ node .output/server/index.mjs
 ## Author
 
 - **Name:** Kiyoung Jung
-- **GitHub:** [Your GitHub Username](https://github.com/fxpoet/holysheet.io)
+- **GitHub:** [https://github.com/fxpoet/holysheet.io](https://github.com/fxpoet/holysheet.io)
 - **Email:** im@fxpoet.com
 
