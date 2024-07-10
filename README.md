@@ -24,7 +24,7 @@ that's why HolySheet was born: to save humanity.
 
 
 ### 2. Supports shortcuts for apps that even I have never heard of
-- Just type the program name and done. Claude AI will spoon-feed the shortcuts to you.
+- Just type the software name and go. Claude AI will spoon-feed the shortcuts to you.
 - Use the time saved by this tool to play games you bought on Steam but never played.
 
 
@@ -50,6 +50,7 @@ Users' ways of utilizing software are sometimes unpredictable.
 
 Whatever the case, as long as it's used well, that's what matters.
 
+------
 
 ## FAQ
 
@@ -58,21 +59,21 @@ Whatever the case, as long as it's used well, that's what matters.
 - A Mac version is also planned. For now, if you tell Claude it's for Mac shortcuts, it will create them accordingly."
 
 
+
 ## 💌 Dear Claude Contest
 
 > 🌟HolySheet is an old idea of mine.
-> realized that mixing Claude with existing old ideas makes them even more amazing.
+> realized that mixing Claude with my old ideas makes them even more amazing.
 > On July 3rd, I found out about the Claude Contest through Facebook,
-> and the contest became a great motivation to start this project.
+> and the contest became a great motivation to put this project into real action.
 
 > Releasing the project within a week was a challenge.
-> I could have thought of better configurations, like using pre-collected program shortcuts and caching etc..
-> but  because the contest duration was short, I focused on completion first.
+> I could have thought of better configurations, like using pre-collected software shortcuts and RAG and caching etc..
+> but because the contest duration was short, I focused on completion first.
 
 > Personally, I'm a bit hesitant about public release due to the cost of LLM calls.
 > Therefore, giving me an award will complete the final piece of the puzzle.
-> The fate of humanity now rests in the hands of the Claude judges.
-> Thank you for your interest in this program.
+> The fate of humanity now rests in the hands of the Claude judges!
 
 
 ## Getting Started Development
