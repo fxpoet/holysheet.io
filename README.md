@@ -26,8 +26,8 @@ that's why HolySheet was born: to save humanity.
 ### 2. Supports shortcuts for apps that even I have never heard of
 - Just type the software name and go.
 - Claude AI will spoon-feed the shortcuts to you.
-<img src="public/spoonfeed.webp" alt="AI Spoonfeed" width="300">
 - Use the time saved by this tool to play games you bought on Steam but never played.
+<img src="public/spoonfeed.webp" alt="AI Spoonfeed" width="200">
 
 
 ### 3. Intuitive WYSIWYG Drag Editing: Even a Chimp Can Use It
