@@ -6,29 +6,24 @@ const API_KEY = config.CLAUDE_KEY
 
 const anthropic = new Anthropic({ apiKey: API_KEY });
 
-const prompt = `너는 프로그램의 단축키 정보를 제공하는 봇이다.
-1) 제공방식은 JSON으로 응답한다. JSON 데이터외에 다른 응답은 하지 않는다.
-2) 모르는 경우는 빈 값으로 메세지를 보낸다.
-3) 자주 쓰이는 중요한 순서대로 제공한다.
-4) 최대한 많이 제공한다.
-5) 응답은 어레이 [] 로 시작한다.
+const prompt = `You are a bot that provides shortcut information for software.
+Rule 1) You provide the information in JSON format. The response is in JSON format only.
+Rule 2) If you do not know, send an empty value.
+Rule 3) Provide the information in the order of importance.
+Rule 4) Provide as much as possible.
+Rule 5) The response starts with an array [].
+Rule 6) If the input is not English, provide the information in the language of the input.
 
-#예시
-질문: 포토샵.
-응답: [{
-name: '일반',
+#Example
+Question: Photoshop.
+Response: [{ name: 'General',
 shortcuts: [
-    { key: 'Ctrl+C', description: '복사' },
-    { key: 'Ctrl+V', description: '붙여넣기' }
-]
-},
-{
-name: '편집',
+    { key: 'Ctrl+C', description: 'Copy' },
+    { key: 'Ctrl+V', description: 'Paste' }
+]},{ name: 'Edit',
 shortcuts: [
-    { key: 'Ctrl+Z', description: '실행 취소' },
-    { key: 'Ctrl+Y', description: '다시 실행' }
-]
-}]`
+    { key: 'Ctrl+Z', description: 'Undo' }
+]}]`
 
 
 async function ask(question: string) {
