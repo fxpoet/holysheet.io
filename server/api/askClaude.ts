@@ -13,6 +13,7 @@ Rule 3) Provide the information in the order of importance.
 Rule 4) Provide as much as possible.
 Rule 5) The response starts with an array [].
 Rule 6) If the input is not English, provide the information in the language of the input.
+Rule 7) Common general shortcuts such as Copy, Undo, and Save are excluded.
 
 #Example
 Question: Photoshop.
@@ -24,7 +25,6 @@ shortcuts: [
 shortcuts: [
     { key: 'Ctrl+Z', description: 'Undo' }
 ]}]`
-
 
 async function ask(question: string) {
     const msg = await anthropic.messages.create({
