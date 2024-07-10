@@ -1,4 +1,4 @@
-# HolySheet.IO: The ClaudeAI spoonfeeding shortcut sheet.
+# HolySheet.IO: Shortcut sheet Organizer with Claude AI spoonfeeding setup
 
 To survive the job competition against AI Robot,
 
@@ -20,6 +20,8 @@ that's why HolySheet was born: to save humanity.
 
 ### 1. Shining Beautiful UI
 - Elegant and easy-to-read layout for all your shortcut needs.
+- Do you think this UI doesn't look nice? That's a new bug! It will be patched soon.
+
 
 ### 2. Supports shortcuts for apps that even I have never heard of
 - Just type the program name and done. Claude AI will spoon-feed the shortcuts to you.
