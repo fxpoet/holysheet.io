@@ -20,7 +20,7 @@ that's why HolySheet was born: to save humanity.
 
 ### 1. Shining Beautiful UI
 - Elegant and easy-to-read layout for all your shortcut needs.
-- Do you think this UI doesn't look nice? That's a new bug! It will be patched soon.
+- Do you think this UI doesn't look nice? That's a bug! It will be patched soon.
 
 
 ### 2. Supports shortcuts for apps that even I have never heard of
@@ -40,15 +40,15 @@ that's why HolySheet was born: to save humanity.
 
 ### 5. Green Eco Friendly: Save the Coke bear
 - Eco-friendly shortcut learning: Save trees by ditching printed cheat sheets.
-- However, we also respect the preferences of those who enjoy destroying the earth environment.
-  It's printable.
+- However, I also respect the preferences of those who enjoy destroying the earth environment.
+  It's also printable.
 
 
 ### 6. Side Effects
 My wife uses this to memorize business terms.
 Users' ways of utilizing software are sometimes unpredictable.
 
-Whatever the case, as long as it's used well, that's what matters.
+Whatever the case, if it's used well, it's an excellent software.
 
 ------
 
@@ -71,6 +71,8 @@ Whatever the case, as long as it's used well, that's what matters.
 > I could have thought of better configurations, like using pre-collected software shortcuts and RAG and caching etc..
 > but because the contest duration was short, I focused on completion first.
 
+> This program is not just a one-time showcase demo project for the contest only.
+> It's a program I created out of my necessity, and it is planned to be offered as a public freeware service.
 > Personally, I'm a bit hesitant about public release due to the cost of LLM calls.
 > Therefore, giving me an award will complete the final piece of the puzzle.
 > The fate of humanity now rests in the hands of the Claude judges!
