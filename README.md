@@ -39,6 +39,7 @@ that's why HolySheet was born: to save humanity.
 
 ![SideCar Mode](public/side-car.jpg)
 
+<img src="public/side-car.jpg" alt="SideCar Mode" width="300">
 
 ### 5. Green Eco Friendly: Save the Coke bear
 - Eco-friendly shortcut learning: Save trees by ditching printed cheat sheets.
