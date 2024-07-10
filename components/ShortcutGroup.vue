@@ -9,7 +9,7 @@
         <div class="flex p-3 bg-gray-100 dark:bg-gray-700 cursor-pointer" @click="toggleCollapse" @contextmenu.prevent="openContextMenu">
 
             <div v-if="editMode" class="group-name editing flex-grow mr-2" @click.stop>
-                <input ref="nameInput" v-model="editedName" style="margin-top:-2px;max-width: 150px;"
+                <input ref="nameInput" v-model="editedName" class="mt-[2px] bg-transparent outline-none font-bold" style="max-width: 150px;"
                     @blur="saveName" @keyup.enter="saveName">
             </div>
 
@@ -172,7 +172,7 @@ export default {
 .editing input {
     width: 100%;
     font-size: 1em;
-    outline: 1px solid #ccc;
+    /*outline: 1px solid #ccc;*/
 }
 
 .resizer {
