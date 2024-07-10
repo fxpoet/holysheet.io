@@ -37,9 +37,7 @@ that's why HolySheet was born: to save humanity.
 - It supports QR codes to share your shortcut sheet.
 - Scan with your phone and hang it next to your monitor.
 
-![SideCar Mode](public/side-car.jpg)
-
-<img src="public/side-car.jpg" alt="SideCar Mode" width="300">
+<img src="public/side-car.jpg" alt="SideCar Mode" width="400">
 
 ### 5. Green Eco Friendly: Save the Coke bear
 - Eco-friendly shortcut learning: Save trees by ditching printed cheat sheets.
