@@ -46,4 +46,50 @@ Users' ways of utilizing software are sometimes unpredictable.
 Whatever the case, as long as it's used well, that's what matters.
 
 
-## Getting Started
+## FAQ
+
+- This was created in a week, so it has many shortcomings. But it should improve in its second week.
+- Yes, yes, of course, a standalone desktop program version is coming soon.
+- A Mac version is also planned. For now, if you tell Claude it's for Mac shortcuts, it will create them accordingly."
+
+
+## 💌 Dear Claude Contest
+
+> 🌟HolySheet is an old idea of mine.
+> realized that mixing Claude with existing old ideas makes them even more amazing.
+> On July 3rd, I learned about the Claude Contest through Facebook,
+> which became a great motivation to start this project.
+
+> Releasing the project within a week was a challenge.
+> I could have thought of better configurations, like using pre-collected program shortcuts and caching..etc
+> but during the short duration of the hackathon, I focused on completion first.
+
+> Personally, I'm a bit hesitant about public release due to the cost of LLM calls.
+> Therefore, giving me an award will complete the final puzzle.
+> The fate of humanity now rests in the hands of the Claude judges.
+> Thank you for your interest in this program.
+
+
+## Getting Started Development
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Build the project:
+```bash
+npm run build
+```
+
+3. Run the code:
+```bash
+node .output/server/index.mjs
+```
+
+## Author
+
+- **Name:** Kiyoung Jung
+- **GitHub:** [Your GitHub Username](https://github.com/fxpoet/holysheet.io)
+- **Email:** im@fxpoet.com
+
