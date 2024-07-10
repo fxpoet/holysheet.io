@@ -23,8 +23,8 @@
         <div class="groups-container mx-auto max-w-full" ref="groupsContainer" :style="{ width: containerWidth + 'px' }">
 
             <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }" :disabled="!editMode">
-                <ShortcutGroup v-for="element in groups" :group="element" @add-shortcut="addShortcut"
-                    @update-group="updateGroup" :edit-mode="editMode" />
+                <ShortcutGroup v-for="element in groups" :group="element" :edit-mode="editMode" @add-shortcut="addShortcut"
+                    @update-group="updateGroup" />
             </VueDraggableNext>
 
             <div class="resize-handle" @mousedown="startResize"></div>

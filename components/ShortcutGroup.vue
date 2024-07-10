@@ -5,24 +5,31 @@
         mb-4
         bg-white dark:bg-gray-900">
 
-        <div class="flex p-3 bg-gray-50">
+        <div class="flex p-3 bg-gray-50 cursor-pointer" @click="toggleCollapse">
 
-            <div v-if="editingName" class="group-name editing flex-grow mr-2">
-                <input ref="nameInput" v-model="editedName" style="margin-top:2px;"
+            <div v-if="editingName" class="group-name editing flex-grow mr-2" @click.stop>
+                <input ref="nameInput" v-model="editedName" style="margin-top:-2px;"
                     @blur="saveName" @keyup.enter="saveName">
             </div>
 
-            <h2 v-else @dblclick="startEditingName" class="group-name flex-grow font-bold" style="line-height: 1.7rem;">
+            <h2 v-else @dblclick.stop="startEditingName" class="group-name flex-grow font-bold">
                 {{ group.name }}
             </h2>
 
-            <UButton icon="i-heroicons-plus-small-solid"
+            <UButton v-if="editMode"
+                icon="i-heroicons-plus-small-solid"
+                class="flex-1 flex-grow-0 mr-2"
+                color="gray" size="2xs"
+                @click.stop="$emit('add-shortcut', group.id)" />
+
+            <UButton
+                :icon="isCollapsed ? 'i-heroicons-chevron-down' : 'i-heroicons-chevron-up'"
                 class="flex-1 flex-grow-0"
-                color="gray" size="xs"
-                @click="$emit('add-shortcut', group.id)" />
+                color="gray" size="2xs" variant="ghost"
+                @click.stop="toggleCollapse" />
         </div>
 
-        <draggable :list="groupShortcuts" item-key="id" :group="{ name: 'shortcuts', pull: true, put: function(to, from) { return to.el.children.length === 0; } }"
+        <draggable v-show="!isCollapsed" :list="groupShortcuts" item-key="id" :group="{ name: 'shortcuts', pull: true, put: function(to, from) { return to.el.children.length === 0; } }"
             class="p-4 pt-4 bg-white-800"
             @change="handleChange">
 
@@ -50,6 +57,7 @@ export default {
 
     props: {
         group: { type: Object, required: true },
+        editMode: { type: Boolean, default: false },
     },
 
     emits: ['add-shortcut', 'update-group', 'resize', 'update', 'delete', 'duplicate'],
@@ -60,6 +68,7 @@ export default {
         const editingName = ref(false)
         const editedName = ref(props.group.name)
         const nameInput = ref(null)
+        const isCollapsed = ref(false)
 
         watch(() => props.group.shortcuts, (newShortcuts) => {
             groupShortcuts.value = newShortcuts
@@ -91,7 +100,8 @@ export default {
             handleChange()
         }
 
-        const startEditingName = () => {
+        const startEditingName = (event) => {
+            event.stopPropagation()
             editingName.value = true
             editedName.value = props.group.name
             nextTick(() => nameInput.value.focus())
@@ -102,6 +112,11 @@ export default {
             if (editedName.value !== props.group.name) {
                 emit('update-group', { ...props.group, name: editedName.value })
             }
+        }
+
+        const toggleCollapse = () => {
+            isCollapsed.value = !isCollapsed.value
+            emit('resize')
         }
 
         return {
@@ -115,6 +130,8 @@ export default {
             duplicateShortcut,
             startEditingName,
             saveName,
+            isCollapsed,
+            toggleCollapse,
         }
     }
 }
