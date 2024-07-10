@@ -1,9 +1,11 @@
 <template>
     <div class="p-4">
-        <div class="groups-container mx-auto">
+        <div class="groups-container mx-auto" :style="{ width: containerWidth + 'px' }">
+
             <div class="flex gap-1 justify-center py-2">
                 <div class="flex-1 justify-start">
-                    <UButton icon="i-heroicons-plus-small-solid" color="gray" size="xs" @click="addNewGroup" />
+                    <UButton icon="i-heroicons-pencil" :color="editMode ? 'green' : 'gray'" size="xs" @click="toggleEditMode"  />
+                    <UButton v-if="editMode" icon="i-heroicons-plus-small-solid" color="gray" size="xs" @click="addNewGroup" class="ml-2" />
                 </div>
                 <div class="flex-1 justify-center flex">
                     <UButton color="white" variant="solid" icon="i-heroicons-sparkles" class="yellow-icon"
@@ -14,20 +16,22 @@
                     <UButton icon="i-heroicons-qr-code" color="gray" size="xs" @click="generateQR" />
                 </div>
             </div>
+
         </div>
 
 
         <div class="groups-container mx-auto max-w-full" ref="groupsContainer" :style="{ width: containerWidth + 'px' }">
-            <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }">
 
+            <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }" :disabled="!editMode">
                 <ShortcutGroup v-for="element in groups" :group="element" @add-shortcut="addShortcut"
-                    @update-group="updateGroup" />
-
+                    @update-group="updateGroup" :edit-mode="editMode" />
             </VueDraggableNext>
+
             <div class="resize-handle" @mousedown="startResize"></div>
         </div>
 
-        <UModal v-model="isModalOpen">
+
+        <UModal v-model="isModalOpen" class="aaa">
             <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
                 <div class="p-0">
                     <UTextarea v-model="question" placeholder="어떤 프로그램을 원하세요?" class="w-full" :rows="2" />
@@ -45,7 +49,7 @@
         <UModal v-model="isLoading">
             <UCard>
                 <div class="p-4 text-center">
-                    <p>Loading...</p>
+                    <p class="p-3">Loading...</p>
                     <UProgress animation="carousel" />
                 </div>
             </UCard>
@@ -55,6 +59,9 @@
             <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
                 <div class="p-4 text-center">
                     <img :src="qrCodeUrl" alt="QR Code" class="mx-auto" />
+                    <p class="mt-2 cursor-pointer text-blue-500 hover:text-blue-700" @click="copyLinkUrl">
+                        {{ linkUrl }}
+                    </p>
                 </div>
                 <template #footer>
                     <div class="flex justify-end">
@@ -146,10 +153,12 @@ const loadDoc = async (id: string) => {
             //@ts-ignore
             groups.value = response.data.groups;
             // 로드된 groups를 savedGroups에 저장
-            savedGroups.value = JSON.parse(JSON.stringify(response.data.groups));
-            // 필요한 경우 다른 데이도 여기서 처리        } else {
-            alert('Load failed');
-            console.error('문서 로드 실패');
+            try {
+                savedGroups.value = JSON.parse(JSON.stringify(response.data.groups));
+            } catch (err) {
+                console.error(err)
+                alert('로드실패')
+            }
         }
     } catch (error) {
         console.error('API 호출 중 오류 발생:', error);
@@ -281,41 +290,52 @@ const updateGroup = (updatedGroup: Partial<Group>) => {
     }
 }
 
+const editMode = ref(false)
 
+const toggleEditMode = () => {
+    editMode.value = !editMode.value
+}
 
 const startResize = (e: MouseEvent) => {
-    const startX = e.clientX
-    const startWidth = containerWidth.value
+    e.preventDefault(); // 이벤트 기본 동작 방지
+    const startX = e.clientX;
+    const startWidth = containerWidth.value;
 
     const resize = (e: MouseEvent) => {
+        e.preventDefault(); // 마우스 이동 중 텍스트 선택 방지
         if (e.buttons === 0) {
-            stopResize()
-            return
+            stopResize();
+            return;
         }
-        const diff = e.clientX - startX
-        containerWidth.value = startWidth + diff
-    }
+        const diff = e.clientX - startX;
+        containerWidth.value = startWidth + diff;
+    };
 
     const stopResize = () => {
-        window.removeEventListener('mousemove', resize)
-        window.removeEventListener('mouseup', stopResize)
-    }
+        window.removeEventListener('mousemove', resize);
+        window.removeEventListener('mouseup', stopResize);
+        document.body.style.userSelect = ''; // 텍스트 선택 기능 복원
+    };
 
-    window.addEventListener('mousemove', resize)
-    window.addEventListener('mouseup', stopResize)
-}
+    window.addEventListener('mousemove', resize);
+    window.addEventListener('mouseup', stopResize);
+    document.body.style.userSelect = 'none'; // 텍스트 선택 기능 비활성화
+};
 
 
 
 const isQRModalOpen = ref(false)
 const qrCodeUrl = ref('')
+const linkUrl = ref('')
 
 const generateQR = async () => {
     try {
         await saveDoc()
         if (docId.value) {
             const url = `${window.location.origin}/a/${docId.value}`
+            linkUrl.value = url;
             qrCodeUrl.value = await QRCode.toDataURL(url)
+
             isQRModalOpen.value = true
         } else {
             console.error('문서 ID를 가져오지 못했습니다.')
@@ -323,6 +343,17 @@ const generateQR = async () => {
     } catch (error) {
         console.error('QR 코드 생성 중 오류 발생:', error)
     }
+}
+
+const copyLinkUrl = () => {
+    navigator.clipboard.writeText(linkUrl.value)
+        .then(() => {
+            alert('링크가 클립보드에 복사되었습니다.')
+        })
+        .catch(err => {
+            console.error('클립보드 복사 실패:', err)
+            alert('링크 복사에 실패했습니다.')
+        })
 }
 </script>
 
