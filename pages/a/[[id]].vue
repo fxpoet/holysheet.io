@@ -92,35 +92,35 @@ import QRCode from 'qrcode'
 const generateShortUUID = customAlphabet('1234567890abcdef', 8)
 
 type Shortcut = {
-    id?: number;
+    id?: string;
     key: string;
     description: string;
 }
 
 type Group = {
-    id?: number;
+    id?: string;
     name: string;
     shortcuts: Shortcut[];
 }
 
 const groups = ref<Group[]>([
     {
-        id: 1,
+        id: '1',
         "name": "General",
         "shortcuts": [
-            { id: 10, "key": "Ctrl+C", "description": "Copy" },
-            { id: 11, "key": "Ctrl+V", "description": "Paste" },
-            { id: 13, "key": "Ctrl+Z", "description": "Undo" },
-            { id: 15, "key": "Ctrl+S", "description": "Save" },
+            { id: '10', "key": "Ctrl+C", "description": "Copy" },
+            { id: '11', "key": "Ctrl+V", "description": "Paste" },
+            { id: '12', "key": "Ctrl+Z", "description": "Undo" },
+            { id: '13', "key": "Ctrl+S", "description": "Save" },
         ]
     },
     {
-        id: 2,
+        id: '2',
         "name": "Format",
         "shortcuts": [
-            { id: 22, "key": "Ctrl+B", "description": "Bold" },
-            { id: 23, "key": "Ctrl+I", "description": "Italic" },
-            { id: 24, "key": "Ctrl+U", "description": "Underline" }
+            { id: '22', "key": "Ctrl+B", "description": "Bold" },
+            { id: '23', "key": "Ctrl+I", "description": "Italic" },
+            { id: '24', "key": "Ctrl+U", "description": "Underline" }
         ]
     }
 ]);
@@ -260,15 +260,13 @@ const groupsContainer = ref<HTMLElement | null>(null)
 const containerWidth = ref(400) // 초기 너비 설정
 
 const addNewGroup = () => {
-    const newId = Math.max(0, ...groups.value.map(g => g.id ?? 0)) + 1
-    groups.value.push({ id: newId, name: 'New Group', shortcuts: [] })
+    groups.value.push({ id: generateShortUUID(), name: 'New Group', shortcuts: [] })
 }
 
-const addShortcut = (groupId: number) => {
+const addShortcut = (groupId: string) => {
     const group = groups.value.find(g => g.id === groupId)
     if (group) {
-        const newId = Math.max(0, ...group.shortcuts.map(s => s.id ?? 0)) + 1
-        group.shortcuts.push({ id: newId, key: 'Keys', description: 'Description' })
+        group.shortcuts.push({ id: generateShortUUID(), key: 'Keys', description: 'Description' })
         group.id = group.id + ''; // force refresh
     }
 }
@@ -280,7 +278,7 @@ const updateGroup = (updatedGroup: Partial<Group>) => {
     }
 }
 
-const deleteGroup = (id: number) => {
+const deleteGroup = (id: string) => {
     console.log('deleteGroup', id);
     groups.value = groups.value.filter(g => g.id !== id)
 }
