@@ -19,7 +19,8 @@
 
         <div v-else @dblclick="startEditingKey"
             class="label bg-white dark:bg-gray-800 py-1.5 pl-1.5 border-gray-300 Numin-w-[50px] cursor-pointer text-right">
-            {{ shortcut.key }}
+
+            <component :is="() => renderShortcut(shortcut.key)" />
         </div>
 
         <UContextMenu v-model="showContextMenu" :virtual-element="virtualElement" class="w-40">
@@ -75,6 +76,33 @@ const editedDescription = ref(props.shortcut.description)
 const keyInput = ref(null)
 const descriptionInput = ref(null)
 const virtualElement = ref({ getBoundingClientRect: () => ({}) })
+
+
+import { UButton } from '#components'
+
+const renderShortcut = (value) => {
+    const keys = String(value).split('+').map(key => key.trim());
+    const display = [];
+
+    keys.forEach((key, index) => {
+        if (index > 0) {
+            display.push(h('span', { class: 'mx-1' }, '+'));
+        }
+
+        if (['⌘', '⌃', '⌥', '⇧', '⇪', '⇥', '⎋', '⌫', '⌦', '⇥', '⇪', '␣', '↑', '↓', '←', '→',
+            'CTRL', 'ALT', 'SHIFT', 'CONTROL', 'OPTION', 'COMMAND', 'WIN', 'ENTER', 'RETURN', 'BACK', 'BACKSPACE', 'DELETE', 'DEL', 'ESC', 'TAB',
+            'CAPSLOCK', 'SPACE', 'ARROWUP', 'ARROWDOWN', 'ARROWLEFT', 'ARROWRIGHT','LEFT','RIGHT', 'UP', 'DOWN'
+        ].includes(key.toUpperCase())) {
+            display.push(h(UButton, { class: 'shadow min-w-[40px]', size: 'xs', color: 'gray' }, () => key));
+        } else {
+            display.push(h(UButton, { class: 'shadow min-w-[24px]', size: 'xs', color: 'gray' }, () => key));
+        }
+    });
+
+    return display;
+}
+
+
 
 const { x, y } = useMouse()
 const { y: windowY } = useWindowScroll()

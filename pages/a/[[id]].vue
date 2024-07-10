@@ -8,6 +8,7 @@
                         @click="toggleEditMode" />
                     <UButton v-if="editMode" icon="i-heroicons-plus-small-solid" color="gray" size="xs"
                         @click="addNewGroup" class="ml-2" />
+
                 </div>
                 <div class="flex-1 justify-center flex">
                     <UButton color="white" variant="solid" icon="i-heroicons-sparkles-solid" class="yellow-icon"
