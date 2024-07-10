@@ -23,7 +23,7 @@
         <div class="groups-container mx-auto max-w-full" ref="groupsContainer" :style="{ width: containerWidth + 'px' }">
 
             <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }" :disabled="!editMode">
-                <ShortcutGroup v-for="element in groups" :group="element" :edit-mode="editMode" @add-shortcut="addShortcut"
+                <ShortcutGroup v-for="element in groups" :group="element" :edit-mode="editMode" @add-shortcut="addShortcut" :key="element.id"
                     @update-group="updateGroup" />
             </VueDraggableNext>
 
@@ -280,6 +280,7 @@ const addShortcut = (groupId: number) => {
     if (group) {
         const newId = Math.max(0, ...group.shortcuts.map(s => s.id ?? 0)) + 1
         group.shortcuts.push({ id: newId, key: '새 단축키', description: '설명을 입력하세요' })
+        group.id = group.id + ''; // force refresh
     }
 }
 

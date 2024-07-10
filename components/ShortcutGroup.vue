@@ -7,12 +7,12 @@
 
         <div class="flex p-3 bg-gray-50 cursor-pointer" @click="toggleCollapse">
 
-            <div v-if="editingName" class="group-name editing flex-grow mr-2" @click.stop>
-                <input ref="nameInput" v-model="editedName" style="margin-top:-2px;"
+            <div v-if="editMode" class="group-name editing flex-grow mr-2" @click.stop>
+                <input ref="nameInput" v-model="editedName" style="margin-top:-2px;max-width: 150px;"
                     @blur="saveName" @keyup.enter="saveName">
             </div>
 
-            <h2 v-else @dblclick.stop="startEditingName" class="group-name flex-grow font-bold">
+            <h2 v-else class="group-name flex-grow font-bold">
                 {{ group.name }}
             </h2>
 
@@ -65,14 +65,22 @@ export default {
     setup(props, { emit }) {
 
         const groupShortcuts = ref(props.group.shortcuts)
-        const editingName = ref(false)
         const editedName = ref(props.group.name)
         const nameInput = ref(null)
         const isCollapsed = ref(false)
 
-        watch(() => props.group.shortcuts, (newShortcuts) => {
-            groupShortcuts.value = newShortcuts
-        })
+        //watch(() => props.editMode, (newEditMode) => {
+        //    if (newEditMode) {
+        //        editedName.value = props.group.name
+        //        nextTick(() => nameInput.value?.focus())
+        //    }
+        //})
+
+        const saveName = () => {
+            if (editedName.value !== props.group.name) {
+                emit('update-group', { ...props.group, name: editedName.value })
+            }
+        }
 
         const handleChange = () => {
             emit('update-group', { ...props.group, shortcuts: groupShortcuts.value })
@@ -100,20 +108,6 @@ export default {
             handleChange()
         }
 
-        const startEditingName = (event) => {
-            event.stopPropagation()
-            editingName.value = true
-            editedName.value = props.group.name
-            nextTick(() => nameInput.value.focus())
-        }
-
-        const saveName = () => {
-            editingName.value = false
-            if (editedName.value !== props.group.name) {
-                emit('update-group', { ...props.group, name: editedName.value })
-            }
-        }
-
         const toggleCollapse = () => {
             isCollapsed.value = !isCollapsed.value
             emit('resize')
@@ -121,15 +115,13 @@ export default {
 
         return {
             groupShortcuts,
-            editingName,
             editedName,
             nameInput,
+            saveName,
             handleChange,
             updateShortcut,
             deleteShortcut,
             duplicateShortcut,
-            startEditingName,
-            saveName,
             isCollapsed,
             toggleCollapse,
         }
