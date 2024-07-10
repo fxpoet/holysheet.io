@@ -18,7 +18,7 @@ that's why HolySheet was born: to save humanity.
 
 ## Features
 
-### 1. Shining Beautiful Format
+### 1. Shining Beautiful UI
 - Elegant and easy-to-read layout for all your shortcut needs.
 
 ### 2. Supports shortcuts for apps that even I have never heard of
