@@ -9,5 +9,8 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui"],
   runtimeConfig: {
     CLAUDE_KEY: process.env.CLAUDE_KEY
-  }
+  },
+  css: [
+    '@/assets/main.css'
+  ]
 })

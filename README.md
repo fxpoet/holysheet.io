@@ -35,7 +35,7 @@ that's why HolySheet was born: to save humanity.
 
 ### 4. Mobile Necromancer: Bringing Dead Phones Back to life
 - It supports QR codes to share your shortcut sheet.
-- Scan with your phone and hang it next to your monitor.
+- Scan QR with your phone and hang it next to your monitor.
 
 <img src="public/side-car.jpg" alt="SideCar Mode" width="400">
 
