@@ -47,7 +47,7 @@
                     <UIcon name="i-heroicons-trash-20-solid" />
                     <span class="truncate">Remove</span>
                     <span class="ms-auto">
-                        <UKbd>R</UKbd>
+                        <UKbd>DEL</UKbd>
                     </span>
                 </button>
 

@@ -4,15 +4,19 @@
 
             <div class="flex gap-1 justify-center py-2">
                 <div class="flex-1 justify-start">
-                    <UButton icon="i-heroicons-pencil" :color="editMode ? 'green' : 'gray'" size="xs" @click="toggleEditMode"  />
-                    <UButton v-if="editMode" icon="i-heroicons-plus-small-solid" color="gray" size="xs" @click="addNewGroup" class="ml-2" />
+                    <UButton icon="i-heroicons-pencil-square" :color="editMode ? 'blue' : 'gray'" size="xs"
+                        @click="toggleEditMode" />
+                    <UButton v-if="editMode" icon="i-heroicons-plus-small-solid" color="gray" size="xs"
+                        @click="addNewGroup" class="ml-2" />
                 </div>
                 <div class="flex-1 justify-center flex">
-                    <UButton color="white" variant="solid" icon="i-heroicons-sparkles" class="yellow-icon"
-                        _click="openModal" @click="openModal">Generate with Claude</UButton>
+                    <UButton color="white" variant="solid" icon="i-heroicons-sparkles-solid" class="yellow-icon"
+                        _click="openModal" @click="openModal">Generate with <b>Claude AI</b></UButton>
                 </div>
                 <div class="flex-1 flex justify-end">
+
                     <UColorModeButton class="mr-2" />
+
                     <UButton icon="i-heroicons-qr-code" color="gray" size="xs" @click="generateQR" />
                 </div>
             </div>
@@ -20,11 +24,13 @@
         </div>
 
 
-        <div class="groups-container mx-auto max-w-full" ref="groupsContainer" :style="{ width: containerWidth + 'px' }">
+        <div class="groups-container mx-auto max-w-full" ref="groupsContainer"
+            :style="{ width: containerWidth + 'px' }">
 
-            <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }" :disabled="!editMode">
-                <ShortcutGroup v-for="element in groups" :group="element" :edit-mode="editMode" @add-shortcut="addShortcut" :key="element.id"
-                    @update-group="updateGroup" />
+            <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }" :disabled="!editMode"
+                ghost-class="ghost-class">
+                <ShortcutGroup v-for="element in groups" :group="element" :edit-mode="editMode"
+                    @add-shortcut="addShortcut" :key="element.id" @update-group="updateGroup" />
             </VueDraggableNext>
 
             <div class="resize-handle" @mousedown="startResize"></div>
@@ -34,13 +40,13 @@
         <UModal v-model="isModalOpen" class="aaa">
             <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
                 <div class="p-0">
-                    <UTextarea v-model="question" placeholder="어떤 프로그램을 원하세요?" class="w-full" :rows="2" />
+                    <UTextarea v-model="question" placeholder="Enter the software name and the related part for the shortcut sheet." class="w-full" :rows="2" />
                 </div>
 
                 <template #footer>
                     <div class="flex justify-end space-x-2">
-                        <UButton color="gray" label="취소" @click="isModalOpen = false" />
-                        <UButton color="blue" label="질문하기" @click="submitQuestion" />
+                        <UButton color="gray" label="Cancel" @click="isModalOpen = false" />
+                        <UButton color="blue" label="Spoonfeed Me" @click="submitQuestion" />
                     </div>
                 </template>
             </UCard>
@@ -65,7 +71,7 @@
                 </div>
                 <template #footer>
                     <div class="flex justify-end">
-                        <UButton color="gray" label="닫기" @click="isQRModalOpen = false" />
+                        <UButton color="gray" label="Close" @click="isQRModalOpen = false" />
                     </div>
                 </template>
             </UCard>
@@ -95,43 +101,21 @@ type Group = {
 const groups = ref<Group[]>([
     {
         id: 1,
-        "name": "일반",
+        "name": "General",
         "shortcuts": [
-            { id: 10, "key": "Ctrl+C", "description": "선택한 셀 복사" },
-            { id: 11, "key": "Ctrl+V", "description": "복사한 셀 붙여넣기" },
-            { id: 12, "key": "Ctrl+X", "description": "선택한 셀 잘라내기" },
-            { id: 13, "key": "Ctrl+Z", "description": "실행 취소" },
-            { id: 14, "key": "Ctrl+Y", "description": "다시 실행" },
-            { id: 15, "key": "Ctrl+S", "description": "파일 저장" },
-            { id: 16, "key": "F2", "description": "선택한 셀 편집" }
+            { id: 10, "key": "Ctrl+C", "description": "Copy" },
+            { id: 11, "key": "Ctrl+V", "description": "Paste" },
+            { id: 13, "key": "Ctrl+Z", "description": "Undo" },
+            { id: 15, "key": "Ctrl+S", "description": "Save" },
         ]
     },
     {
         id: 2,
-        "name": "셀 서식2",
+        "name": "Format",
         "shortcuts": [
-            { id: 22, "key": "Ctrl+B", "description": "굵게" },
-            { id: 23, "key": "Ctrl+I", "description": "기울임꼴" },
-            { id: 24, "key": "Ctrl+U", "description": "밑줄" }
-        ]
-    },
-    {
-        id: 3,
-        "name": "데이터 관리",
-        "shortcuts": [
-            { id: 31, "key": "Ctrl+F", "description": "찾기" },
-            { id: 32, "key": "Ctrl+H", "description": "바꾸기" },
-            { id: 33, "key": "F5", "description": "셀로 이동" },
-            { id: 34, "key": "Ctrl+Shift+L", "description": "필터 켜기/끄기" }
-        ]
-    },
-    {
-        id: 4,
-        "name": "수식",
-        "shortcuts": [
-            { id: 41, "key": "Alt+=", "description": "자동 합계" },
-            { id: 42, "key": "F4", "description": "수식에서 절대 참조와 상대 참조 전환" },
-            { id: 43, "key": "F9", "description": "수식 계산" }
+            { id: 22, "key": "Ctrl+B", "description": "Bold" },
+            { id: 23, "key": "Ctrl+I", "description": "Italic" },
+            { id: 24, "key": "Ctrl+U", "description": "Underline" }
         ]
     }
 ]);
@@ -272,14 +256,14 @@ const containerWidth = ref(400) // 초기 너비 설정
 
 const addNewGroup = () => {
     const newId = Math.max(0, ...groups.value.map(g => g.id ?? 0)) + 1
-    groups.value.push({ id: newId, name: '새 그룹', shortcuts: [] })
+    groups.value.push({ id: newId, name: 'New Group', shortcuts: [] })
 }
 
 const addShortcut = (groupId: number) => {
     const group = groups.value.find(g => g.id === groupId)
     if (group) {
         const newId = Math.max(0, ...group.shortcuts.map(s => s.id ?? 0)) + 1
-        group.shortcuts.push({ id: newId, key: '새 단축키', description: '설명을 입력하세요' })
+        group.shortcuts.push({ id: newId, key: 'Keys', description: 'Description' })
         group.id = group.id + ''; // force refresh
     }
 }
@@ -359,11 +343,16 @@ const copyLinkUrl = () => {
 </script>
 
 <style>
+.yellow-icon>span {
+    color: #ffe200;
+}
+
 .groups-container {
     display: flex;
     overflow-x: auto;
     position: relative;
-    width: 100%; /* 기본값 설정 */
+    width: 100%;
+    /* 기본값 설정 */
 }
 
 .groups-container>div:not(.resize-handle) {
@@ -404,5 +393,10 @@ const copyLinkUrl = () => {
         opacity: 1;
         transform: scale(-1);
     }
+}
+
+.ghost-class {
+    opacity: 0.5;
+    border: 2px dashed #4a4a4a;
 }
 </style>
