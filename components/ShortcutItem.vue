@@ -2,9 +2,9 @@
     <div class="row relative flex mb-1 justify-between" :class="{ editingRow: isEditing }"
         @contextmenu.prevent="onContextMenu">
 
-        <div v-if="isEditing" class="editing py-1.5 pr-2 border-b border-gray-300 min-w-[50px] cursor-pointer">
-            <input v-model="editedDescription" @blur="saveDescription" @keyup.enter="saveDescription"
-                ref="descriptionInput" />
+        <div v-if="isEditing" class="editing py-1.5 pr-2 border-b border-gray-300 min-w-[50px] cursor-pointer flex-grow">
+            <input v-model="editedDescription" @blur="onDescriptionBlur" @keyup.enter="saveDescription"
+                @keydown.tab.prevent="focusKeyInput" ref="descriptionInput" />
         </div>
 
         <div v-else @dblclick="startEditingDescription"
@@ -13,7 +13,8 @@
         </div>
 
         <div v-if="isEditing" class="editing py-1.5 pl-1.5 border-b border-gray-300 min-w-[50px] cursor-pointer text-right">
-            <input v-model="editedKey" @blur="saveKey" @keyup.enter="saveKey" ref="keyInput" class="text-right" />
+            <input v-model="editedKey" @blur="onKeyBlur" @keyup.enter="saveKey"
+                @keydown.tab.prevent="focusDescriptionInput" ref="keyInput" class="text-right" />
         </div>
 
         <div v-else @dblclick="startEditingKey"
@@ -141,6 +142,26 @@ const duplicateShortcut = () => {
 const removeShortcut = () => {
     emit('delete', props.shortcut.id);
     showContextMenu.value = false;
+}
+
+const focusKeyInput = () => {
+  keyInput.value.focus();
+}
+
+const focusDescriptionInput = () => {
+  descriptionInput.value.focus();
+}
+
+const onDescriptionBlur = (event) => {
+  if (event.relatedTarget !== keyInput.value) {
+    saveDescription();
+  }
+}
+
+const onKeyBlur = (event) => {
+  if (event.relatedTarget !== descriptionInput.value) {
+    saveKey();
+  }
 }
 </script>
 
