@@ -30,7 +30,7 @@
             <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }" :disabled="!editMode"
                 ghost-class="ghost-class">
                 <ShortcutGroup v-for="element in groups" :group="element" :edit-mode="editMode"
-                    @add-shortcut="addShortcut" :key="element.id" @update-group="updateGroup" />
+                    @add-shortcut="addShortcut" :key="element.id" @update-group="updateGroup" @delete-group="deleteGroup" />
             </VueDraggableNext>
 
             <div class="resize-handle" @mousedown="startResize"></div>
@@ -274,6 +274,12 @@ const updateGroup = (updatedGroup: Partial<Group>) => {
         groups.value[index] = { ...groups.value[index], ...updatedGroup }
     }
 }
+
+const deleteGroup = (id: number) => {
+    console.log('deleteGroup', id);
+    groups.value = groups.value.filter(g => g.id !== id)
+}
+
 
 const editMode = ref(false)
 

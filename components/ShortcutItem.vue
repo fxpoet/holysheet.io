@@ -50,7 +50,6 @@
                         <UKbd>DEL</UKbd>
                     </span>
                 </button>
-
             </div>
         </UContextMenu>
     </div>
@@ -81,7 +80,7 @@ const { y: windowY } = useWindowScroll()
 
 const activeContextMenu = inject('activeContextMenu')
 
-const onContextMenu = () => {
+const onContextMenu = (event) => {
     const top = unref(y) - unref(windowY)
     const left = unref(x)
 

@@ -3,9 +3,10 @@
         relative w-full flex flex-col overflow-hidden rounded-lg
         border border-gray-300 dark:border-gray-800 shadow-lg
         bg-white dark:bg-gray-800"
-        :class="isCollapsed ? 'mb-1 shadow-sm' : 'mb-4 shadow-lg'">
+        :class="isCollapsed ? 'mb-1 shadow-sm' : 'mb-4 shadow-lg'"
+        >
 
-        <div class="flex p-3 bg-gray-100 dark:bg-gray-700 cursor-pointer" @click="toggleCollapse">
+        <div class="flex p-3 bg-gray-100 dark:bg-gray-700 cursor-pointer" @click="toggleCollapse" @contextmenu.prevent="openContextMenu">
 
             <div v-if="editMode" class="group-name editing flex-grow mr-2" @click.stop>
                 <input ref="nameInput" v-model="editedName" style="margin-top:-2px;max-width: 150px;"
@@ -38,13 +39,25 @@
             </template>
 
         </draggable>
+
+        <UContextMenu v-model="showContextMenu" :virtual-element="virtualElement" class="w-40">
+            <div class="p-1 flex flex-col">
+                <button @click="removeGroup"
+                    class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                    <UIcon name="i-heroicons-trash-20-solid" />
+                    <span class="truncate">Remove Group</span>
+                </button>
+
+            </div>
+        </UContextMenu>
     </div>
 </template>
 
 <script>
-import { ref, watch, nextTick } from 'vue'
+import { ref, computed, inject } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
 import ShortcutItem from './ShortcutItem.vue'
+import { useMouse, useWindowScroll } from '@vueuse/core'
 
 export default {
 
@@ -60,7 +73,7 @@ export default {
         editMode: { type: Boolean, default: false },
     },
 
-    emits: ['add-shortcut', 'update-group', 'resize', 'update', 'delete', 'duplicate'],
+    emits: ['add-shortcut', 'update-group', 'resize', 'update', 'delete', 'duplicate', 'delete-group'],
 
     setup(props, { emit }) {
 
@@ -68,13 +81,17 @@ export default {
         const editedName = ref(props.group.name)
         const nameInput = ref(null)
         const isCollapsed = ref(false)
+        const virtualElement = ref({ getBoundingClientRect: () => ({}) })
+        const activeContextMenu = inject('activeContextMenu')
 
-        //watch(() => props.editMode, (newEditMode) => {
-        //    if (newEditMode) {
-        //        editedName.value = props.group.name
-        //        nextTick(() => nameInput.value?.focus())
-        //    }
-        //})
+        const showContextMenu = computed({
+            get: () => activeContextMenu.value === `group-${props.group.id}`,
+            set: (value) => {
+                if (!value) {
+                    activeContextMenu.value = null
+                }
+            }
+        })
 
         const saveName = () => {
             if (editedName.value !== props.group.name) {
@@ -102,6 +119,11 @@ export default {
             }
         }
 
+        const removeGroup = () => {
+            console.log('aaaa');
+            emit('delete-group', props.group.id)
+        }
+
         const duplicateShortcut = (shortcut) => {
             const newShortcut = { ...shortcut }
             groupShortcuts.value.push(newShortcut)
@@ -111,6 +133,19 @@ export default {
         const toggleCollapse = () => {
             isCollapsed.value = !isCollapsed.value
             emit('resize')
+        }
+
+        const openContextMenu = (event) => {
+
+            virtualElement.value.getBoundingClientRect = () => ({
+                width: 0, height: 0,
+                top: event.clientY,
+                right: event.clientX,
+                bottom: event.clientY,
+                left: event.clientX
+            })
+
+            activeContextMenu.value = `group-${props.group.id}`
         }
 
         return {
@@ -124,6 +159,10 @@ export default {
             duplicateShortcut,
             isCollapsed,
             toggleCollapse,
+            showContextMenu,
+            openContextMenu,
+            virtualElement,
+            removeGroup
         }
     }
 }
