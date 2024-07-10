@@ -23,6 +23,15 @@
 
         <UContextMenu v-model="showContextMenu" :virtual-element="virtualElement" class="w-40">
             <div class="p-1 flex flex-col">
+                <button @click="removeShortcut"
+                    class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                    <UIcon name="i-heroicons-trash-20-solid" />
+                    <span class="truncate">Remove</span>
+                    <span class="ms-auto">
+                        <UKbd>DEL</UKbd>
+                    </span>
+                </button>
+
                 <button @click="editShortcut"
                     class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
                     tabindex="-1">
@@ -39,15 +48,6 @@
                     <span class="truncate">Duplicate</span>
                     <span class="ms-auto">
                         <UKbd>D</UKbd>
-                    </span>
-                </button>
-
-                <button @click="removeShortcut"
-                    class="group flex items-center gap-1.5 w-full px-1.5 py-1.5 text-sm rounded-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
-                    <UIcon name="i-heroicons-trash-20-solid" />
-                    <span class="truncate">Remove</span>
-                    <span class="ms-auto">
-                        <UKbd>DEL</UKbd>
                     </span>
                 </button>
             </div>
