@@ -1,17 +1,23 @@
-# HolySheet: The Claude AI-spoonfeeding shortcut viewer
+# HolySheet.IO: The ClaudeAI-spoonfeeding shortcut viewer
 
-To survive the job competition against AI Robot, you must at least use shortcuts to increase your productivity and speed.
+To survive the job competition against AI Robot,
+
+you must at least use shortcuts to increase your productivity and speed.
+
 Many people try to learn shortcuts. Even in the 21st century,
+
 they're stuck in an endless cycle of blog searching, editing, printing, and TRASHING shortcut cheat sheets.
 
 And that's why HolySheet was born: to save humanity.
 
 ![HolySheet Screenshot](public/screenshot-01.png)
 
+[Visit HolySheet.IO](https://holysheet.io)
+
 ## Features
 
 ### 1. Shining Beautiful Format
-Elegant and easy-to-read layout for all your shortcut needs.
+- Elegant and easy-to-read layout for all your shortcut needs.
 
 ### 2. Supports shortcuts for apps that even I have never heard of
 - Just type the program name and done. Claude AI will spoon-feed the shortcuts to you.
@@ -24,7 +30,8 @@ Elegant and easy-to-read layout for all your shortcut needs.
 
 
 ### 4. Mobile Necromancer: Bringing Dead Phones Back to Life
-- It supports QR codes. Scan with your phone and hang it next to your monitor.
+- It supports QR codes to share your shortcut sheet.
+- Scan with your phone and hang it next to your monitor.
 
 
 ### 5. Green Eco Technology
@@ -32,7 +39,7 @@ Elegant and easy-to-read layout for all your shortcut needs.
 - However, we also respect the preferences of those who enjoy destroying the earth environment. It's printable.
 
 
-### 6. Best Side Effects
+### 6. Side Effects
 My wife uses this to memorize business terms.
 Users' ways of utilizing software are sometimes unpredictable.
 
@@ -40,4 +47,3 @@ Whatever the case, as long as it's used well, that's what matters.
 
 
 ## Getting Started
-
