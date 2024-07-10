@@ -12,7 +12,7 @@ We need a brain-dead easy anti-exhaustion note tool.
 
 that's why HolySheet was born: to save humanity.
 
-![HolySheet Screenshot](public/screenshot-01.png)
+![HolySheet Screenshot](public/screenshot-01.gif)
 
 [Visit HolySheet.IO](https://holysheet.io)
 
