@@ -1,4 +1,4 @@
-# HolySheet.IO: The ClaudeAI-spoonfeeding shortcut sheet.
+# HolySheet.IO: The ClaudeAI spoonfeeding shortcut sheet.
 
 To survive the job competition against AI Robot,
 
@@ -26,7 +26,7 @@ that's why HolySheet was born: to save humanity.
 - Use the time saved by this tool to play games you bought on Steam but never played.
 
 
-### 3. Intuitive WYSIWYG Drag Editing So Simple Even a Chimp Can Use It
+### 3. Intuitive WYSIWYG Drag Editing: Even a Chimp Can Use It
 - Your next-door granny has already mastered this tool.
 - Change the order by dragging, and write by double-clicking.
 
@@ -36,7 +36,7 @@ that's why HolySheet was born: to save humanity.
 - Scan with your phone and hang it next to your monitor.
 
 
-### 5. Green Eco Technology
+### 5. Green Eco Friendly: Save the Coke bear
 - Eco-friendly shortcut learning: Save trees by ditching printed cheat sheets.
 - However, we also respect the preferences of those who enjoy destroying the earth environment.
   It's printable.
