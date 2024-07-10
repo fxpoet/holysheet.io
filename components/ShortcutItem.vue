@@ -8,7 +8,7 @@
         </div>
 
         <div v-else @dblclick="startEditingDescription"
-            class="label py-1.5 pr-2 border-gray-300 mr-1 min-w-[50px] cursor-pointer">
+            class="label bg-white dark:bg-gray-800 py-1.5 pr-2 border-gray-300 mr-1 min-w-[50px] cursor-pointer">
             {{ shortcut.description }}
         </div>
 
@@ -17,7 +17,7 @@
         </div>
 
         <div v-else @dblclick="startEditingKey"
-            class="label py-1.5 pl-1.5 border-gray-300 Numin-w-[50px] cursor-pointer text-right">
+            class="label bg-white dark:bg-gray-800 py-1.5 pl-1.5 border-gray-300 Numin-w-[50px] cursor-pointer text-right">
             {{ shortcut.key }}
         </div>
 
@@ -174,6 +174,5 @@ const removeShortcut = () => {
 
 .label {
     z-index: 10;
-    background-color: white;
 }
 </style>

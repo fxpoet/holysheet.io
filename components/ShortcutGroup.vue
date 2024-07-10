@@ -2,9 +2,10 @@
     <div class="shortcut-group
         relative w-full flex flex-col overflow-hidden rounded-lg
         border border-gray-300 dark:border-gray-800 shadow-lg
-        bg-white dark:bg-gray-900" :class="isCollapsed ? 'mb-1 shadow-sm' : 'mb-4 shadow-lg'">
+        bg-white dark:bg-gray-800"
+        :class="isCollapsed ? 'mb-1 shadow-sm' : 'mb-4 shadow-lg'">
 
-        <div class="flex p-3 bg-gray-100 cursor-pointer" @click="toggleCollapse">
+        <div class="flex p-3 bg-gray-100 dark:bg-gray-700 cursor-pointer" @click="toggleCollapse">
 
             <div v-if="editMode" class="group-name editing flex-grow mr-2" @click.stop>
                 <input ref="nameInput" v-model="editedName" style="margin-top:-2px;max-width: 150px;"
