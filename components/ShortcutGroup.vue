@@ -32,7 +32,7 @@
 
         <draggable v-show="!isCollapsed" :list="groupShortcuts" item-key="id"
             :disabled="!editMode"
-            :group="{ name: 'shortcuts', pull: true, put: function(to, from) { return to.el.children.length === 0; } }"
+            :group="{ name: 'shortcuts', pull: true, put: (to, from) => from.options.group.name === 'shortcuts' }"
             class="p-4 pt-4 bg-white-800"
             @change="handleChange">
 
@@ -101,8 +101,9 @@ export default {
             }
         }
 
-        const handleChange = () => {
-            emit('update-group', { ...props.group, shortcuts: groupShortcuts.value })
+        const handleChange = (event) => {
+            console.log('handleEvent:', event);
+            emit('update-group', { ...props.group, shortcuts: groupShortcuts.value });
         }
 
         const updateShortcut = (updatedShortcut) => {
