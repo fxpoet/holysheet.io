@@ -37,7 +37,7 @@ that's why HolySheet was born: to save humanity.
 
 ### 4. Mobile Necromancer: Bringing Dead Phones Back to life
 - It supports QR codes to share your shortcut sheet.
-- Scan QR with your phone and hang it next to your monitor.
+- Scan QR with your old, unused phone and hang it next to your monitor.
 
 <img src="public/side-car.jpg" alt="SideCar Mode" width="400">
 
@@ -48,8 +48,10 @@ that's why HolySheet was born: to save humanity.
 
 
 ### 6. Side Effects
-My wife uses this to memorize business terms.
+My wife uses this to memorize business terms or excel function reference sheet.
 Users' ways of utilizing software are sometimes unpredictable.
+
+<img src="public/screenshot-02.png" alt="excel" width="400">
 
 Whatever the case, if it's used well, it's an excellent software.
 
