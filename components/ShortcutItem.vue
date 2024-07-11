@@ -3,7 +3,7 @@
         @contextmenu.prevent="onContextMenu">
 
         <div v-if="isEditing" class="editing py-1.5 pr-2 border-b border-gray-300 min-w-[50px] cursor-pointer flex-grow">
-            <input v-model="editedDescription" @blur="onDescriptionBlur" @keyup.enter="saveDescription"
+            <input v-model="editedDescription" @blur="onDescBlur" @keyup.enter="saveDescription"
                 @keydown.tab.prevent="focusKeyInput" ref="descriptionInput" />
         </div>
 
@@ -14,7 +14,7 @@
 
         <div v-if="isEditing" class="editing py-1.5 pl-1.5 border-b border-gray-300 min-w-[50px] cursor-pointer text-right">
             <input v-model="editedKey" @blur="onKeyBlur" @keyup.enter="saveKey"
-                @keydown.tab.prevent="focusDescriptionInput" ref="keyInput" class="text-right" />
+                @keydown.tab.prevent="focusDescInput" ref="keyInput" class="text-right" />
         </div>
 
         <div v-else @dblclick="startEditingKey"
@@ -59,12 +59,10 @@
 
 <script setup>
 import { useMouse, useWindowScroll } from '@vueuse/core'
+import { UButton } from '#components'
 
 const props = defineProps({
-    shortcut: {
-        type: Object,
-        required: true
-    }
+    shortcut: { type: Object, required: true }
 })
 
 const emit = defineEmits(['update', 'delete', 'duplicate'])
@@ -75,10 +73,6 @@ const editedDescription = ref(props.shortcut.description)
 
 const keyInput = ref(null)
 const descriptionInput = ref(null)
-const virtualElement = ref({ getBoundingClientRect: () => ({}) })
-
-
-import { UButton } from '#components'
 
 const renderShortcut = (value) => {
     const keys = String(value).split('+').map(key => key.trim());
@@ -103,11 +97,10 @@ const renderShortcut = (value) => {
 }
 
 
-
 const { x, y } = useMouse()
 const { y: windowY } = useWindowScroll()
-
 const activeContextMenu = inject('activeContextMenu')
+const virtualElement = ref({ getBoundingClientRect: () => ({}) })
 
 const onContextMenu = (event) => {
     const top = unref(y) - unref(windowY)
@@ -172,24 +165,15 @@ const removeShortcut = () => {
     showContextMenu.value = false;
 }
 
-const focusKeyInput = () => {
-  keyInput.value.focus();
-}
+const focusKeyInput = () => { keyInput.value.focus(); }
+const focusDescInput = () => { descriptionInput.value.focus(); }
 
-const focusDescriptionInput = () => {
-  descriptionInput.value.focus();
-}
-
-const onDescriptionBlur = (event) => {
-  if (event.relatedTarget !== keyInput.value) {
-    saveDescription();
-  }
+const onDescBlur = (event) => {
+    if (event.relatedTarget !== keyInput.value) saveDescription();
 }
 
 const onKeyBlur = (event) => {
-  if (event.relatedTarget !== descriptionInput.value) {
-    saveKey();
-  }
+    if (event.relatedTarget !== descriptionInput.value) saveKey();
 }
 </script>
 
