@@ -30,7 +30,9 @@
                 @click.stop="toggleCollapse" />
         </div>
 
-        <draggable v-show="!isCollapsed" :list="groupShortcuts" item-key="id" :group="{ name: 'shortcuts', pull: true, put: function(to, from) { return to.el.children.length === 0; } }"
+        <draggable v-show="!isCollapsed" :list="groupShortcuts" item-key="id"
+            :disabled="!editMode"
+            :group="{ name: 'shortcuts', pull: true, put: function(to, from) { return to.el.children.length === 0; } }"
             class="p-4 pt-4 bg-white-800"
             @change="handleChange">
 

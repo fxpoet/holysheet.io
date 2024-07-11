@@ -19,7 +19,6 @@
 
         <div v-else @dblclick="startEditingKey"
             class="label bg-white dark:bg-gray-800 py-1.5 pl-1.5 border-gray-300 Numin-w-[50px] cursor-pointer text-right">
-
             <component :is="() => renderShortcut(shortcut.key)" />
         </div>
 
