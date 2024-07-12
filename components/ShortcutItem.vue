@@ -18,7 +18,7 @@
         </div>
 
         <div v-else @dblclick="startEditingKey"
-            class="label bg-white dark:bg-gray-800 py-1.5 pl-1.5 border-gray-300 Numin-w-[50px] cursor-pointer text-right">
+            class="label bg-white dark:bg-gray-800 py-1.5 pl-1.5 border-gray-300 Numin-w-[50px] cursor-pointer text-right text-nowrap">
             <component :is="() => renderShortcut(shortcut.key)" />
         </div>
 
@@ -82,13 +82,16 @@ const renderShortcut = (value) => {
             display.push(h('span', { class: 'mx-1' }, '+'));
         }
 
-        if (['⌘', '⌃', '⌥', '⇧', '⇪', '⇥', '⎋', '⌫', '⌦', '⇥', '⇪', '␣', '↑', '↓', '←', '→',
+        //'⌘', '⌃', '⌥', '⇧', '⇪', '⇥', '⎋', '⌫', '⌦', '⇥', '⇪', '␣', '↑', '↓', '←', '→',
+        if ([
             'CTRL', 'ALT', 'SHIFT', 'CONTROL', 'OPTION', 'COMMAND', 'WIN', 'ENTER', 'RETURN', 'BACK', 'BACKSPACE', 'DELETE', 'DEL', 'ESC', 'TAB',
             'CAPSLOCK', 'SPACE', 'ARROWUP', 'ARROWDOWN', 'ARROWLEFT', 'ARROWRIGHT','LEFT','RIGHT', 'UP', 'DOWN'
         ].includes(key.toUpperCase())) {
-            display.push(h(UButton, { class: 'shadow min-w-[40px]', size: 'xs', color: 'gray' }, () => key));
+
+            display.push(h(UButton, { class: 'key-shadow min-w-[36px]', size: 'xs', color: 'gray' }, () => key));
+
         } else {
-            display.push(h(UButton, { class: 'shadow min-w-[24px]', size: 'xs', color: 'gray' }, () => key));
+            display.push(h(UButton, { class: 'key-shadow min-w-[24px]', size: 'xs', color: 'gray' }, () => key));
         }
     });
 
@@ -175,6 +178,13 @@ const onKeyBlur = (event) => {
     if (event.relatedTarget !== descriptionInput.value) saveKey();
 }
 </script>
+
+<style>
+.key-shadow {
+    /* refer from formkit */
+    box-shadow: inset 0 -2px 0 0 #cdcde6, inset 0 0 1px 1px #fff, 0 1px 2px 1px rgba(30,35,90,0.4);
+}
+</style>
 
 <style scoped>
 .row::before {
