@@ -1,12 +1,12 @@
 <template>
     <div class="p-4">
-        <div class="groups-container mx-auto" :style="{ width: containerWidth + 'px' }">
 
+        <div class="groups-container mx-auto" :style="{ width: containerWidth + 'px' }">
             <div class="flex gap-1 justify-center py-2">
                 <div class="flex-1 justify-start">
-                    <UButton icon="i-heroicons-pencil-square" :color="editMode ? 'blue' : 'gray'" size="xs"
-                        @click="toggleEditMode" />
-                    <UButton v-if="editMode" icon="i-heroicons-plus-small-solid" color="gray" size="xs"
+                    <UButton icon="i-heroicons-pencil-square" :color="editor.isEditing ? 'blue' : 'gray'" size="xs"
+                        @click="editor.toggleEdit" />
+                    <UButton v-if="isEditing" icon="i-heroicons-plus-small-solid" color="gray" size="xs"
                         @click="addNewGroup" class="ml-2" />
 
                 </div>
@@ -21,16 +21,15 @@
                     <UButton icon="i-heroicons-qr-code" color="gray" size="xs" @click="generateQR" />
                 </div>
             </div>
-
         </div>
 
 
         <div class="groups-container mx-auto max-w-full" ref="groupsContainer"
             :style="{ width: containerWidth + 'px' }">
 
-            <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }" :disabled="!editMode"
+            <VueDraggableNext :list="groups" item-key="id" :group="{ name: 'groups' }" :disabled="!editor.isEditing"
                 ghost-class="ghost-class">
-                <ShortcutGroup v-for="element in groups" :group="element" :edit-mode="editMode"
+                <ShortcutGroup v-for="element in groups" :group="element" :edit-mode="editor.isEditing"
                     @add-shortcut="addShortcut" :key="element.id" @update-group="updateGroup" @delete-group="deleteGroup" />
             </VueDraggableNext>
 
@@ -89,6 +88,10 @@
 import { VueDraggableNext } from 'vue-draggable-next'
 import { customAlphabet } from 'nanoid'
 import QRCode from 'qrcode'
+
+import { useEditorStore } from '@/stores/editor'
+const editor = useEditorStore()
+const { isEditing } = storeToRefs(editor)
 
 const generateShortUUID = customAlphabet('1234567890abcdef', 8)
 
@@ -284,12 +287,6 @@ const deleteGroup = (id: string) => {
     groups.value = groups.value.filter(g => g.id !== id)
 }
 
-
-const editMode = ref(false)
-
-const toggleEditMode = () => {
-    editMode.value = !editMode.value
-}
 
 const startResize = (e: MouseEvent) => {
     e.preventDefault(); // 이벤트 기본 동작 방지
