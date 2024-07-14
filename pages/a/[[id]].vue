@@ -76,11 +76,6 @@
                 </template>
             </UCard>
         </UModal>
-
-        <!-- 푸터 추가 -->
-        <footer class="text-center text-xs text-gray-500 mt-1">
-            <a href="https://holysheet.io">HOLYSHEET.IO</a>
-        </footer>
     </div>
 </template>
 
