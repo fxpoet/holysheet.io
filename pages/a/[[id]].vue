@@ -86,7 +86,7 @@ import QRCode from 'qrcode'
 
 import { useEditorStore } from '@/stores/editor'
 const editor = useEditorStore()
-const { isEditing } = storeToRefs(editor)
+const { isEditing, containerWidth } = storeToRefs(editor)
 
 const generateShortUUID = customAlphabet('1234567890abcdef', 8)
 
@@ -196,7 +196,7 @@ onMounted(async () => {
 
     // 뷰포트 너비를 감지하여 containerWidth 설정
     if (window.innerWidth <= 400) {
-        containerWidth.value = window.innerWidth;
+        editor.setContainerWidth(window.innerWidth);
     }
 })
 
@@ -256,7 +256,6 @@ const buildKeySets = (keyData: string) => {
 
 
 const groupsContainer = ref<HTMLElement | null>(null)
-const containerWidth = ref(400) // 초기 너비 설정
 
 const addNewGroup = () => {
     groups.value.push({ id: generateShortUUID(), name: 'New Group', shortcuts: [] })
@@ -286,7 +285,7 @@ const deleteGroup = (id: string) => {
 const startResize = (e: MouseEvent) => {
     e.preventDefault(); // 이벤트 기본 동작 방지
     const startX = e.clientX;
-    const startWidth = containerWidth.value;
+    const startWidth = editor.containerWidth;
 
     const resize = (e: MouseEvent) => {
         e.preventDefault(); // 마우스 이동 중 텍스트 선택 방지
@@ -295,7 +294,7 @@ const startResize = (e: MouseEvent) => {
             return;
         }
         const diff = e.clientX - startX;
-        containerWidth.value = startWidth + diff;
+        editor.setContainerWidth(startWidth + diff);
     };
 
     const stopResize = () => {
