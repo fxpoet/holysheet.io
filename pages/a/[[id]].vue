@@ -220,7 +220,8 @@ const submitQuestion = async () => {
 
             question.value = ''
 
-            console.log('Claude 응답:', response.content[0].text.trim())
+            //console.log('Claude 응답:', response.content[0].text.trim())
+
             try {
                 groups.value = buildKeySets(response.content[0].text);
             } catch (err) {
@@ -264,7 +265,7 @@ const addNewGroup = () => {
 const addShortcut = (groupId: string) => {
     const group = groups.value.find(g => g.id === groupId)
     if (group) {
-        group.shortcuts.push({ id: generateShortUUID(), key: 'Keys', description: 'Description' })
+        group.shortcuts.push({ id: generateShortUUID(), key: 'Keys', description: 'DoubleClick Me' })
         group.id = group.id + ''; // force refresh
     }
 }
